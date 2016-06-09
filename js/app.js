@@ -18,7 +18,7 @@ movieApp.config(function($routeProvider){
     
     .when('/movie.html', {
         templateUrl: 'pages/movie.html',
-        controller: 'homeController'
+        controller: 'movieController'
     })
     
 });
@@ -43,7 +43,7 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
     
 }]);
 
-movieApp.controller('movieController',['$scope', '$resourc','movieService',function($scope, $resource, movieService){
+movieApp.controller('movieController',['$scope', '$resource','movieService',function($scope, $resource, movieService){
     
     $scope.movie = movieService.movie;
     
