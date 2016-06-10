@@ -43,13 +43,18 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
     
 }]);
 
-movieApp.controller('movieController',['$scope', '$resource','movieService',function($scope, $resource, movieService){
+movieApp.controller('movieController',['$scope','$resource','$http','movieService',function($scope, $resource, $http, movieService){
     
     $scope.movie = movieService.movie;
     
-    $scope.movieAPI = $resource("http://www.omdbapi.com/?t=Thor&y=&plot=full&r=json")
+    $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=Thor&y=&plot=full&r=json")
         .then(function(response){
             $scope.details = response.data;
+    });
+    
+    $scope.moviePoster = $http.get("http://img.omdbapi.com/?i=tt0800369&apikey=cc6412ad")
+        .then(function(response){
+            $scope.poster = response.data;
     });
     
     console.log($scope.movieAPI);
@@ -60,6 +65,20 @@ movieApp.controller('movieController',['$scope', '$resource','movieService',func
 
 API Key: cc6412ad 
 
-Example: http://img.omdbapi.com/?i=tt2294629&apikey=cc6412ad 
+Example: 
+
+http://img.omdbapi.com/?i=tt2294629&apikey=cc6412ad 
+
+
+Turn the title into it's IMBD database number to get the image.
+In this case Thor is tt0800369
+
+http://img.omdbapi.com/?i=tt0800369&apikey=cc6412ad
+
+
+
+Parameters:
+i = IMDb ID
+h (optional) = Desired height of image.
 
 */
