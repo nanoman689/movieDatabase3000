@@ -1,40 +1,30 @@
 <!--
 Movie results for {{movie}} {{details}}
 -->
-<div>
-<img ng-src="{{movie.poster}}"> 
-</div>
 
-<div>
-    <h1>{{movie}}, {{ details.Year }}</h1>
-</div>
 
-<div>
-    <p>Release Date:{{ details.Released }} ({{ details.Runtime }})</p>
-</div>
-<div>
-    <p>{{ details.Plot }}</p>
-</div>
-<div>       
-    <p>Directors: {{ details.Director }}</p>
+<div class="movieInfo"> 
+   
+    <div class="movieDetails">
+        <img ng-src="http://img.omdbapi.com/?i={{ details.imdbID }}&apikey=cc6412ad">
+        <span class="movieTitle"><h1>{{movie}}, {{ details.Year }}</h1><br /> <p>Release Date: {{ details.Released }} ({{ details.Runtime }})</p></span>
+    </div>
+        
+    <div class="movieInfo">
+        <h2>Plot:</h2> <h4>{{ details.Plot }}</h4>
+        <h2>Directors:</h2> <h4>{{ details.Director }}</h4>
+        <h2>Actors:</h2> <h4>{{ details.Actors }}</h4>
+        <h2>Genre:</h2> <h4>{{ details.Genre }}</h4>
+        <h2>IMDb Rating:</h2> <h4>{{ details.imdbRating }}</h4>
+    <div>
+        <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch the trailers!</a></p>
+    </div>
+    <div>
+        <p><a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy the movie on Amazon</a></p>
+    </div>
+
 </div>    
-    <p>Actors: {{ details.Actors }}</p>
-</div>
 
-<div>
-    <p>Genre: {{ details.Genre }}</p>
-</div>
-
-<div>
-    <p>IMDb Rating: <h3>{{ details.imdbRating }}</h3></p>
-    <p>{{details.imdbID}}</p>
-</div>
-
-<div>
-    <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch the trailers!</a></p>
-</div>
-
-
-<div>
-    <p><a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy the movie on Amazon</a></p>
-</div>
+<footer>
+    <a href="#/">&larr;Back to the search Page</a>  
+</footer>

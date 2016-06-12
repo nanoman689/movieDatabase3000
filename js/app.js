@@ -37,26 +37,21 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
     
     $scope.movie = movieService.movie;
     
-    $scope.$watch('city', function(){
+    $scope.$watch('movie', function(){
        movieService.movie = $scope.movie; 
     });
     
 }]);
 
-movieApp.controller('movieController',['$scope','$resource','$http','movieService',function($scope, $resource, $http, movieService){
+movieApp.controller('movieController',['$scope','$resource','$http', '$routeParams','movieService',function($scope, $resource, $http,  $routeParams, movieService){
     
     $scope.movie = movieService.movie;
     
-    $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=Thor&y=&plot=full&r=json")
+    $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json")
         .then(function(response){
             $scope.details = response.data;
     });
-    
-    $scope.moviePoster = $http.get("http://img.omdbapi.com/?i=tt0800369&apikey=cc6412ad")
-        .then(function(response){
-            $scope.poster = response.data;
-    });
-    
+
     console.log($scope.movieAPI);
     
 }]);
@@ -74,8 +69,6 @@ Turn the title into it's IMBD database number to get the image.
 In this case Thor is tt0800369
 
 http://img.omdbapi.com/?i=tt0800369&apikey=cc6412ad
-
-
 
 Parameters:
 i = IMDb ID
