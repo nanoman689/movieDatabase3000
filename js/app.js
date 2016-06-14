@@ -50,9 +50,20 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
     $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json")
         .then(function(response){
             $scope.details = response.data;
+            $scope.movieIMDB = response.data.details.imdbID;
     });
 
     console.log($scope.movieAPI);
+    
+    console.log($scope.movieIMDB);
+    
+    $scope.movieDBAPI = $http.get("https://api.themoviedb.org/3/movie/" + $scope.movieIMDB + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
+        .then(function(response){
+            $scope.moreDetails = response.data;
+            
+    });
+    
+    console.log($scope.movieDBAPI);
     
 }]);
 
@@ -73,5 +84,18 @@ http://img.omdbapi.com/?i=tt0800369&apikey=cc6412ad
 Parameters:
 i = IMDb ID
 h (optional) = Desired height of image.
+
+    $scope.movieDBAPI = $http.get("https://api.themoviedb.org/3/movie/550?api_key=651514f7e8896c44cfcec49d1bf2f778&discover/movie?certification_country=US&certification=R&sort_by=revenue.desc&with_cast=3896?callback=JSON_CALLBACK")
+
+replace 550 with the IMDB 
+
+{{ details.imdbID }}
+
+The movie database API
+
+651514f7e8896c44cfcec49d1bf2f778
+https://api.themoviedb.org/3/movie/550?api_key=651514f7e8896c44cfcec49d1bf2f778
+
+https://api.themoviedb.org/3/movie/" + $scope.movieIMDB + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/
 
 */
