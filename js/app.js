@@ -50,21 +50,26 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
     $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json")
         .then(function(response){
             $scope.details = response.data;
-    });
-    
-    movieDB($scope.details.imdbID);
-
-    console.log($scope.movieAPI);
-    
-    $scope.movieDB = function(moreMovieInfo){
-        $http.get("https://api.themoviedb.org/3/movie/" + moreMovieInfo + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
-            .then(function(response){
-                $scope.moreDetails = response.data;
-        });
-    }
+        },
+        $http.get("https://api.themoviedb.org/3/movie/" + $scope.details.imdbID + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
+        .then(function(response){
+            $scope.moreDetails = response.data;
+        })   
+    );
 }]);
 
 /* 
+    $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json", { 
+            $scope.details = response.data;
+            }, 
+              function(response){
+                $http.get("https://api.themoviedb.org/3/movie/" + $scope.details + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK", { 
+                    $scope.moreDetails = response.data; 
+                    }, 
+                        function(response) {
+        });
+    });
+
 
 $scope.movieDBAPI = $http.get("https://api.themoviedb.org/3/movie/" + $scope.movieIMDB + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
         .then(function(response){
@@ -73,8 +78,6 @@ $scope.movieDBAPI = $http.get("https://api.themoviedb.org/3/movie/" + $scope.mov
     });
     
     console.log($scope.movieDBAPI);
-
-
 
 API Key: cc6412ad 
 
