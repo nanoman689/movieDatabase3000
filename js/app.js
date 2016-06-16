@@ -56,7 +56,7 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
 
     console.log($scope.movieAPI);
     
-    var movieDB = function(moreMovieInfo){
+    $scope.movieDB = function(moreMovieInfo){
         $http.get("https://api.themoviedb.org/3/movie/" + moreMovieInfo + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
             .then(function(response){
                 $scope.moreDetails = response.data;
