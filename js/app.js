@@ -50,11 +50,12 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
     $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json")
         .then(function(response){
             $scope.details = response.data;
-        },
-        $http.get("https://api.themoviedb.org/3/movie/" + $scope.details.imdbID + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
-        .then(function(response){
-            $scope.moreDetails = response.data;
-        })   
+            
+            $http.get("https://api.themoviedb.org/3/movie/" + $scope.details.imdbID + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
+           .then(function(response){
+               $scope.moreDetails = response.data;
+           })
+        }
     );
 }]);
 
