@@ -14,13 +14,11 @@ Movie results for {{movie}} {{details}}
         <h2>Plot:</h2> <h4>{{ details.Plot }}</h4>
         <h2>Directors:</h2> <h4><a id="director" href="director">{{ details.Director }}</a></h4>
         <h2>Production Companies</h2><h4>{{moreDetails.production_companies[0].name}}</h4>
-        <h2>Actors:</h2>
-            <h4><a id="actorsname" ng-mouseover="{{details.Actors.split(',')[0]}}" href="actor.htm"><span>{{details.Actors.split(',')[0]}}</span></a>,
-                <a id="actorsname" href="actor">{{details.Actors.split(',')[1]}}</a>,
-                <a id="actorsname" href="actor">{{details.Actors.split(',')[2]}}</a>
-            </h4>
-        <h2>Genre:</h2> <h4>{{ details.Genre }}</h4>
+        <h2>Production Countries</h2><h4>{{moreDetails.production_countries[0].name}}</h4>
+        <h2>Actors:</h2> <h4>{{details.Actors}}</h4>
+        <h2>Genre:</h2> <h4>{{details.Genre }}</h4>
         <h2>IMDb Rating:</h2> <h4>{{ details.imdbRating }}</h4>
+    <div ng-repeat="details in detail"></div>
     <div>
         <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch the trailers!</a></p>
     </div>
