@@ -1,29 +1,34 @@
-<!--
-Movie results for {{movie}} {{details}}
--->
-
-
 <div class="movieInfo"> 
    
     <div class="movieDetails">
         <img ng-src="http://img.omdbapi.com/?i={{ details.imdbID }}&apikey=cc6412ad">
         <span class="movieTitle"><h1>{{movie}}, {{ details.Year }}</h1><br /> <p>Release Date: {{ details.Released }} ({{ details.Runtime }}) <br /> {{moreDetails.tagline}}</p></span>
-    </div>
-        
+    </div> 
     <div class="movieInfo">
         <h2>Plot:</h2> <h4>{{ details.Plot }}</h4>
-        <h2>Directors:</h2> <h4><a id="director" href="director">{{ details.Director }}</a></h4>
+        <h2>Directors:</h2> <h4>{{ details.Director }}</h4>
         <h2>Production Companies</h2><h4>{{moreDetails.production_companies[0].name}}</h4>
         <h2>Production Countries</h2><h4>{{moreDetails.production_countries[0].name}}</h4>
-        <h2>Actors:</h2> <h4>{{details.Actors}}</h4>
+        <!-- <h2>Actors:</h2> <h4>{{details.Actors}}</h4> -->
+        <h2>Actors:</h2><h4>
+            <a href="">{{details.Actors.split(',')[0]}}</a><br>
+            <a href="">{{details.Actors.split(',')[1]}}</a><br>
+            <a href="">{{details.Actors.split(',')[2]}}</a><br>
+            <a href="">{{details.Actors.split(',')[3]}}</a><br>
+            <a href="">{{details.Actors.split(',')[4]}}</a><br>
         <h2>Genre:</h2> <h4>{{details.Genre }}</h4>
         <h2>IMDb Rating:</h2> <h4>{{ details.imdbRating }}</h4>
-    <div ng-repeat="details in detail"></div>
+        <h2>Related Movies:</h2>
+            <ul class="relatedMovies">
+              <li ng-repeat="movie in related.Search">
+                <a href="#" id="{{ $index + 1 }}" ng-click="update(movie)">{{ movie.Title }}</a>, {{ movie.Year }}
+              </li>
+            </ul>
     <div>
-        <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch the trailers!</a></p>
+        <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank">Watch the trailers!</a></p>
     </div>
     <div>
-        <p><a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy the movie on Amazon</a></p>
+        <p><a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank">Buy the movie on Amazon</a></p>
     </div>
 
     <p><a ng-href="{{moreDetails.homepage}}">{{movie}} homepage</a></p>
@@ -38,6 +43,6 @@ Movie results for {{movie}} {{details}}
 <!--
 
 {{ details.Actors }}
-
+?api_key=651514f7e8896c44cfcec49d1bf2f778
 
 -->
