@@ -82,9 +82,11 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
     /* update search on click of related movies */
     
     $scope.update = function(movie) {
-      $scope.movie = movieService.movie;;
+      $scope.movie = movieService.movie;
     };
-     
+
+    /* IMBD Info on the Actor */
+    
     $scope.movieActor = "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=";
         $http({
             method: 'jsonp',
@@ -92,7 +94,7 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
             params: {
                 format: 'jsonp',
                 q: 'Anthony Hopkins',
-                callback: 'JSON_CALLBACK'
+                callback: 'JSONP_CALLBACK'
             }
         }).then(function (response) {
             alert(response.data);
@@ -101,6 +103,9 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
 }]);    
 
 /*
+
+getActor(actorID)
+
 
 {{details.Actors}}
 http://api.themoviedb.org/3/person/id/movie_credits

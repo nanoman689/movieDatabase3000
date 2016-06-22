@@ -11,7 +11,7 @@
         <h2>Production Countries</h2><h4>{{moreDetails.production_countries[0].name}}</h4>
         <!-- <h2>Actors:</h2> <h4>{{details.Actors}}</h4> -->
         <h2>Actors:</h2><h4>
-            <a href="">{{details.Actors.split(',')[0]}}</a><br>
+            <a href="../pages/actor.html" ng-click="getActor(actorID)">{{details.Actors.split(',')[0]}}</a><br>
             <a href="">{{details.Actors.split(',')[1]}}</a><br>
             <a href="">{{details.Actors.split(',')[2]}}</a><br>
             <a href="">{{details.Actors.split(',')[3]}}</a><br>
@@ -44,5 +44,6 @@
 
 {{ details.Actors }}
 ?api_key=651514f7e8896c44cfcec49d1bf2f778
+
 
 -->
