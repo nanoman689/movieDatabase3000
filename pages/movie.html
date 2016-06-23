@@ -11,7 +11,7 @@
         <h2>Production Countries</h2><h4>{{moreDetails.production_countries[0].name}}</h4>
         <!-- <h2>Actors:</h2> <h4>{{details.Actors}}</h4> -->
         <h2>Actors:</h2><h4>
-            <a href="../pages/actor.html" ng-click="getActor(actorID)">{{details.Actors.split(',')[0]}}</a><br>
+            <a href="../pages/actor.html" ng-click="getActor(details.Actors.split(',')[0])">{{details.Actors.split(',')[0]}}</a><br>
             <a href="">{{details.Actors.split(',')[1]}}</a><br>
             <a href="">{{details.Actors.split(',')[2]}}</a><br>
             <a href="">{{details.Actors.split(',')[3]}}</a><br>
@@ -21,7 +21,8 @@
         <h2>Related Movies:</h2>
             <ul class="relatedMovies">
               <li ng-repeat="movie in related.Search">
-                <a href="#" id="{{ $index + 1 }}" ng-click="update(movie)">{{ movie.Title }}</a>, {{ movie.Year }}
+                <a href="#" id="{{ $index + 1 }}" ng-model="movie.Title" ng-click="update(movie.Title)">{{ movie.Title }}</a>, {{ movie.Year }}
+                
               </li>
             </ul>
     <div>
