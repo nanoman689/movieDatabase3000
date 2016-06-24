@@ -86,13 +86,18 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
       console.log($scope.movie);
     };
 
-
+    $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=anthony%20hopkins")
+        .then(function(response){
+            $scope.actorDetails = response.data;
+            console.log($scope.actorDetails);
+    });  
+    
+    
 }]);    
 
 /*
 
 getActor(actorID)
-
 
 {{details.Actors}}
 http://api.themoviedb.org/3/person/id/movie_credits
@@ -134,6 +139,6 @@ $scope.movieActor = "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=";
             alert(response.data);
         });    
 
-
+https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=anthony+hopkins
 
 */

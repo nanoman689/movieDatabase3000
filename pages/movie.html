@@ -36,6 +36,11 @@
 
 </div>    
 
+    <img src="https://api.themoviedb.org/3{{actorDetails.results.backdrop_path}}"><br>
+    Title: {{actorDetails.results[0].known_for[0].original_title}}<br>
+    Overview: {{actorDetails.results[0].known_for[0].overview}}<br>
+    Release Date: {{actorDetails.results[0].known_for[0].release_date}}<br>
+
 <footer>
     <a href="#/">&larr;Back to the search Page</a>  
 </footer>
