@@ -21,7 +21,7 @@ movieApp.config(function($routeProvider){
         controller: 'movieController'
     })
     
-    .when('/actor.html', {
+    .when('/actor.html/:name', {
         templateUrl: 'pages/actor.html',
         controller: 'actorController'
     })
@@ -33,10 +33,23 @@ movieApp.config(function($routeProvider){
 movieApp.service('movieService',function(){
    
     this.movie = "Thor";
-    
+    this.getMovieDetails = function(name){
+
+    }
+
 });
 
 // controllers
+
+movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'movieService',
+    function($scope, $http, $routeParams, movieService){
+    console.log($routeParams.name);
+    $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=" + $routeParams.name)
+        .then(function(response){
+            $scope.actorDetails = response.data;
+            console.log($scope.actorDetails);
+        });
+}]);
 
 movieApp.controller('homeController', ['$scope', 'movieService',function($scope, movieService){
     
@@ -51,20 +64,23 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
 movieApp.controller('movieController',['$scope','$resource','$http', '$routeParams','movieService',function($scope, $resource, $http,  $routeParams, movieService){
     
     $scope.movie = movieService.movie;
+    $scope.splitActors = function(string, nb) {
+        var array = string.split(',');
+        return array[nb];
+    }
     
     $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json")
         .then(function(response){
             $scope.details = response.data;
-        
-            console.log($scope.details.Actors);
-            
-            $scope.splitActors = function(string, nb) {
-                var array = string.split(',');
-                return array[nb];
-            }
-            
-            $http.get("https://api.themoviedb.org/3/movie/" + $scope.details.imdbID + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
+            console.log('The response from the API call');
+            console.log(response);
+
+            $http.get("https://api.themoviedb.org/3/movie/"
+                + $scope.details.imdbID
+                + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
            .then(function(response){
+               console.log('The second Then');
+               console.log(response);
                $scope.moreDetails = response.data;
            })
 
