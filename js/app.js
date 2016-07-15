@@ -4,7 +4,6 @@
 
 var movieApp = angular.module('movieApp',['ngRoute','ngResource']);
 
-
 // route
 
 movieApp.config(function($routeProvider){
