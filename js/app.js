@@ -1,10 +1,10 @@
 'use strict';
 
-// modules
+// Modules
 
 var movieApp = angular.module('movieApp',['ngRoute','ngResource']);
 
-// route
+// Routes
 
 movieApp.config(function($routeProvider){
    
@@ -15,7 +15,7 @@ movieApp.config(function($routeProvider){
         controller: 'homeController'
     })
     
-    .when('/movie.html', {
+    .when('/movie.html/:name', {
         templateUrl: 'pages/movie.html',
         controller: 'movieController'
     })
@@ -27,7 +27,7 @@ movieApp.config(function($routeProvider){
     
 });
 
-// service
+// Service
 
 movieApp.service('movieService',function(){
    
@@ -38,31 +38,31 @@ movieApp.service('movieService',function(){
 
 });
 
-// controllers
+// Controllers
 
 movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'movieService',
     function($scope, $http, $routeParams, movieService){
     console.log($routeParams.name);
     $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=" + $routeParams.name)
         .then(function(response){
-            $scope.actorDetails = response.data;
+            $scope.actorDetails = response.data.results[0];
             console.log($scope.actorDetails);
         });
 }]);
 
 movieApp.controller('homeController', ['$scope', 'movieService',function($scope, movieService){
     
-    $scope.movie = movieService.movie;
-    
-    $scope.$watch('movie', function(){
-       movieService.movie = $scope.movie; 
-    });
+    $scope.movie = "Thor";
     
 }]);
 
-movieApp.controller('movieController',['$scope','$resource','$http', '$routeParams','movieService',function($scope, $resource, $http,  $routeParams, movieService){
+movieApp.controller('movieController',
+    ['$scope','$resource','$http', '$routeParams','movieService', '$route',
+        function($scope, $resource, $http,  $routeParams, movieService, $route){
     
-    $scope.movie = movieService.movie;
+    $scope.movie = $routeParams.name;
+
+    console.log('The movie when the page loads: ' + $scope.movie);
     $scope.splitActors = function(string, nb) {
         var array = string.split(',');
         return array[nb];
@@ -82,9 +82,7 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
                console.log(response);
                $scope.moreDetails = response.data;
            })
-
         }
-
     );
     
     /* related movies */
@@ -97,63 +95,9 @@ movieApp.controller('movieController',['$scope','$resource','$http', '$routePara
     /* update search on click of related movies */
     
     $scope.update = function(movie) {
-      $scope.movie = movieService.movie;
+      $scope.movie = movie;
       console.log($scope.movie);
+      $route.reload();
     };
-
-    $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=anthony%20hopkins")
-        .then(function(response){
-            $scope.actorDetails = response.data;
-            console.log($scope.actorDetails);
-    });  
-    
     
 }]);    
-
-/*
-
-getActor(actorID)
-
-{{details.Actors}}
-http://api.themoviedb.org/3/person/id/movie_credits
-
-http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=jessica+simpson
-
-$scope.movieActor = "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=";
-    $http({
-        method: 'jsonp',
-        url: $scope.movieActor,
-        params: {
-            format: 'jsonp',
-            q: 'Anthony Hopkins',
-            callback: 'JSON_CALLBACK'
-        }
-    }).then(function (response) {
-        alert(response.data);
-    });
-
-    $scope.movieActor = $http.get("http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=anthonyhopkins")
-        .then(function(response){
-            $scope.actorDetails = response.data;
-            console.log($scope.actorDetails);
-    });  
-
-
-    ---- IMBD Info on the Actor ----
-
-    $scope.movieActor = "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=";
-        $http({
-            method: 'jsonp',
-            url: $scope.movieActor,
-            params: {
-                format: 'jsonp',
-                q: 'Anthony Hopkins',
-                callback: 'JSONP_CALLBACK'
-            }
-        }).then(function (response) {
-            alert(response.data);
-        });    
-
-https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=anthony+hopkins
-
-*/

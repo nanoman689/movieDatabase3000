@@ -9,32 +9,27 @@
         <h2>Directors:</h2> <h4>{{ details.Director }}</h4>
         <h2>Production Companies</h2><h4>{{moreDetails.production_companies[0].name}}</h4>
         <h2>Production Countries</h2><h4>{{moreDetails.production_countries[0].name}}</h4>
-        <!-- <h2>Actors:</h2> <h4>{{details.Actors}}</h4> -->
         <h2>Actors:</h2><h4>
-            <a href="#/actor.html/{{details.Actors.split(',')[0]}}">{{details.Actors.split(',')[0]}}</a><br>
-            <a href="#/actor.html/{{details.Actors.split(',')[1]}}">{{details.Actors.split(',')[1]}}</a><br>
-            <a href="#/actor.html/{{details.Actors.split(',')[2]}}">{{details.Actors.split(',')[2]}}</a><br>
-            <a href="#/actor.html/{{details.Actors.split(',')[3]}}">{{details.Actors.split(',')[3]}}</a><br>
-            <a href="#/actor.html/{{details.Actors.split(',')[4]}}">{{details.Actors.split(',')[4]}}</a><br>
+            <a href="#/actor.html/{{actor}}" ng-repeat="actor in details.Actors.split(',')">{{actor}}</a>
         <h2>Genre:</h2> <h4>{{details.Genre }}</h4>
         <h2>IMDb Rating:</h2> <h4>{{ details.imdbRating }}</h4>
         <h2>Related Movies:</h2>
             <ul class="relatedMovies">
               <li ng-repeat="movie in related.Search">
-                <a href="#" id="{{ $index + 1 }}" ng-model="movie.Title" ng-click="update(movie.Title)">{{ movie.Title }}</a>, {{ movie.Year }}
-                
+                <a href="#/movie.html/{{movie.Title}}" id="{{ $index + 1 }}">
+                    {{ movie.Title }}</a>, {{ movie.Year }}     
               </li>
             </ul>
-    <div>
-        <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank">Watch the trailers!</a></p>
-    </div>
-    <div>
-        <p><a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank">Buy the movie on Amazon</a></p>
-    </div>
+        <div>
+            <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank">Watch the trailers!</a></p>
+        </div>
+        <div>
+            <p><a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank">Buy the movie on Amazon</a></p>
+        </div>
 
     <p><a ng-href="{{moreDetails.homepage}}">{{movie}} homepage</a></p>
 
-</div>    
+    </div>    
 
     <img src="https://api.themoviedb.org/3{{actorDetails.results.backdrop_path}}"><br>
     Title: {{actorDetails.results[0].known_for[0].original_title}}<br>
@@ -47,9 +42,6 @@
 
 
 <!--
-
 {{ details.Actors }}
 ?api_key=651514f7e8896c44cfcec49d1bf2f778
-
-
 -->

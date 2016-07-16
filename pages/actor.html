@@ -1,22 +1,14 @@
 <div class="actorDetailsPage">
-    <h1>Actor Details: {{actorDetails.results.name}}</h1>
+    <h1>Actor Details: {{actorDetails.name}}</h1>
     
-    <img src="https://api.themoviedb.org/3{{actorDetails.results.backdrop_path}}"><br>
-    Other movies {{actorDetails.results.name}} has been in:<br>
-    <br> 
-    Title: {{actorDetails.results[0].known_for[0].original_title}}<br>
-    Overview: {{actorDetails.results[0].known_for[0].overview}}<br>
-    Release Date: {{actorDetails.results[0].known_for[0].release_date}}<br>
+    <img ng-src="https://api.themoviedb.org/3{{actorDetails.profile_path}}"><br>
+    Other movies {{actorDetails.name}} has been in:<br>
     <br>
-    Title: {{actorDetails.results[1].known_for[1].original_title}}<br>
-    Overview: {{actorDetails.results[1].known_for[1].overview}}<br>
-    Release Date: {{actorDetails.results[1].known_for[1].release_date}}<br>
-    <br>
-    Title: {{actorDetails.results[2].known_for[2].original_title}}<br>
-    Overview: {{actorDetails.results[2].known_for[2].overview}}<br>
-    Release Date: {{actorDetails.results[2].known_for[2].release_date}}<br>
-    <br>
-    
+    <div ng-repeat="movie in actorDetails.known_for">
+        <div>Title: {{movie.original_title}}</div>
+        <div>Overview: {{movie.overview}}</div>
+        <div>Release Date: {{movie.release_date}}</div>
+    </div>
 </div>
 
 <footer>
