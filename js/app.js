@@ -40,6 +40,8 @@ movieApp.service('movieService',function(){
 
 // Controllers
 
+// Actor controller - Gets the Actor's info from the IMDBid
+
 movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'movieService',
     function($scope, $http, $routeParams, movieService){
     console.log($routeParams.name);
@@ -50,11 +52,17 @@ movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'mov
         });
 }]);
 
+// Search controller - Pulls the value from the search
+
 movieApp.controller('homeController', ['$scope', 'movieService',function($scope, movieService){
     
     $scope.movie = "Thor";
     
 }]);
+
+// Movie Controller - Pull the name of the movie from the search and uses two APIs to get the results
+// OMDBapi - Pulls most of the movie's information
+// TheMoviewDB - Pulls more information for the movie as well as information for the actor(s)
 
 movieApp.controller('movieController',
     ['$scope','$resource','$http', '$routeParams','movieService', '$route',
@@ -85,7 +93,7 @@ movieApp.controller('movieController',
         }
     );
     
-    /* related movies */
+    /* related movies results */
     
     $http.get("http://www.omdbapi.com/?s=" + $scope.movie)
         .then(function(response) {

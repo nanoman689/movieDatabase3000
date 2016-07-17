@@ -10,7 +10,11 @@
         <h2>Production Companies</h2><h4>{{moreDetails.production_companies[0].name}}</h4>
         <h2>Production Countries</h2><h4>{{moreDetails.production_countries[0].name}}</h4>
         <h2>Actors:</h2><h4>
-            <a href="#/actor.html/{{actor}}" ng-repeat="actor in details.Actors.split(',')">{{actor}}</a>
+            <ul class="actorResults">
+                <li ng-repeat="actor in details.Actors.split(',')">
+                    <a href="#/actor.html/{{actor}}">{{actor}}</a>
+                </li>
+            </ul>
         <h2>Genre:</h2> <h4>{{details.Genre }}</h4>
         <h2>IMDb Rating:</h2> <h4>{{ details.imdbRating }}</h4>
         <h2>Related Movies:</h2>
@@ -31,10 +35,6 @@
 
     </div>    
 
-    <img src="https://api.themoviedb.org/3{{actorDetails.results.backdrop_path}}"><br>
-    Title: {{actorDetails.results[0].known_for[0].original_title}}<br>
-    Overview: {{actorDetails.results[0].known_for[0].overview}}<br>
-    Release Date: {{actorDetails.results[0].known_for[0].release_date}}<br>
 
 <footer>
     <a href="#/">&larr;Back to the search Page</a>  

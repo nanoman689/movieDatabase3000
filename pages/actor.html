@@ -1,16 +1,24 @@
 <div class="actorDetailsPage">
     <h1>Actor Details: {{actorDetails.name}}</h1>
     
-    <img ng-src="https://api.themoviedb.org/3{{actorDetails.profile_path}}"><br>
+    <img ng-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{actorDetails.profile_path}}?api_key=651514f7e8896c44cfcec49d1bf2f778"><br>
     Other movies {{actorDetails.name}} has been in:<br>
     <br>
-    <div ng-repeat="movie in actorDetails.known_for">
-        <div>Title: {{movie.original_title}}</div>
-        <div>Overview: {{movie.overview}}</div>
-        <div>Release Date: {{movie.release_date}}</div>
+    <div class="actorResults">
+        <ul class="actorResultsList"> 
+           <li ng-repeat="movie in actorDetails.known_for">
+                <div><h2>Title:</h2> <h4>{{movie.original_title}}</h4></div>
+                <div><h2>Overview:</h2> <h4>{{movie.overview}}</h4></div>
+                <div><h2>Release Date:</h2> <h4>{{movie.release_date}}</h4></div>
+            </li>
+        </ul>
     </div>
 </div>
 
 <footer>
     <a href="../pages/movie.html">&larr;Back to the Movie Page</a>  
+</footer>
+
+<footer>
+    <a href="#/">&larr;Back to the search Page</a>  
 </footer>

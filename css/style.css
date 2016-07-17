@@ -107,7 +107,7 @@ a.button:hover {
     background: #3cb0fd;
 }
 
-/* movie results page */
+/* Movie results page */
 
 .movieInfo.ng-scope {
     margin: 0 auto;
@@ -124,6 +124,14 @@ span.movieTitle {
     position: relative;
     padding:10px;
     top:80px;
+}
+
+/* Actor results page */
+
+.actorDetailsPage.ng-binding.ng-scope {
+    margin: 0 auto;
+    width:825px;
+    background-color: rgba(147, 190, 255, 0.49);
 }
 
 footer {
