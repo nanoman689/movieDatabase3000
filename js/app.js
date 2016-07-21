@@ -48,6 +48,7 @@ movieApp.service('movieService',function(){
 movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'movieService',
     function($scope, $http, $routeParams, movieService){
     console.log($routeParams.name);
+    $scope.movie =  movieService.movie;
     $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=" + $routeParams.name)
         .then(function(response){
             $scope.actorDetails = response.data.results[0];
@@ -72,6 +73,7 @@ movieApp.controller('movieController',
         function($scope, $resource, $http,  $routeParams, movieService, $route){
     
     $scope.movie = $routeParams.name;
+    movieService.movie = $scope.movie;
 
     console.log('The movie when the page loads: ' + $scope.movie);
     $scope.splitActors = function(string, nb) {
@@ -81,6 +83,14 @@ movieApp.controller('movieController',
     
     $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json")
         .then(function(response){
+
+            if(response.data.Error){
+                console.log(response.data.Error);
+                //redirect to error view
+            }else{
+                //everything else
+            }
+
             $scope.details = response.data;
             console.log('The response from the API call');
             console.log(response);
