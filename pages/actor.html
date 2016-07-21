@@ -1,8 +1,9 @@
 <div class="actorDetailsPage">
-    <h1>Actor Details: {{actorDetails.name}}</h1>
     
+    <div class="actorTitle">
+        <h2>{{actorDetails.name}}</h2>
+    </div>
     <img ng-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{actorDetails.profile_path}}?api_key=651514f7e8896c44cfcec49d1bf2f778"><br>
-    Other movies {{actorDetails.name}} has been in:<br>
     <br>
     <div class="actorResults">
         <ul class="actorResultsList"> 

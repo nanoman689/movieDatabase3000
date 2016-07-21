@@ -11,16 +11,19 @@ movieApp.config(function($routeProvider){
     $routeProvider
     
     .when('/', {
+        title: 'Home',
         templateUrl: 'pages/home.html',
         controller: 'homeController'
     })
     
     .when('/movie.html/:name', {
+        title: 'Movie Results',
         templateUrl: 'pages/movie.html',
         controller: 'movieController'
     })
     
     .when('/actor.html/:name', {
+        title: 'Home',
         templateUrl: 'pages/actor.html',
         controller: 'actorController'
     })
