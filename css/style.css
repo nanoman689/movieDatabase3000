@@ -12,9 +12,10 @@ a:visited {
     color: #495F7F;
 }
 
+/* need to fix img */
+
 img {
-    width: 300px;
-    height: 100%;
+
 }   
 
 a {
