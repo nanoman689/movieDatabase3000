@@ -15,6 +15,7 @@ a:visited {
 /* need to fix img */
 
 img {
+    width: 300px;
 
 }   
 
@@ -64,9 +65,9 @@ h4 {
     font-family: 'Arimo', sans-serif;
     font-weight: 700;
     font-size: 1.75em;
-    margin: 0 auto;
-    width: 805px;
-    margin-top:120px;
+
+    width: 100%;
+
     margin-bottom: 10px;
     padding: 10px;
     background-color: rgba(147, 190, 255, 0.49);
