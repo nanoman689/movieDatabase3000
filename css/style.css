@@ -50,8 +50,11 @@ h2 {
 }
 
 h3 {
-    
+    font-family: 'Arimo', sans-serif;
+    font-weight: 700;
+    font-size: 1.75em;
 }
+
 
 h4 {
     font-family: 'Arimo', sans-serif;
@@ -65,13 +68,17 @@ h4 {
     font-family: 'Arimo', sans-serif;
     font-weight: 700;
     font-size: 1.75em;
-
     width: 100%;
-
+    height: 75px;
     margin-bottom: 10px;
     padding: 10px;
-    background-color: rgba(147, 190, 255, 0.49);
+    background-color: rgb(74, 85, 98);
 }
+
+form.searchMovie.ng-pristine.ng-valid {
+    padding: 100px;
+}
+
 
 .searchBox {
     margin: 0 auto;
@@ -82,6 +89,16 @@ h4 {
 .searchPopCorn {
     position: relative;
     top:4px;
+}
+
+.popCornHead {
+    width:70px;
+    position: relative;
+    top:1px;
+}
+
+.titleHead{
+    vertical-align: middle;
 }
 
 /* button and input box */
@@ -111,10 +128,23 @@ a.button:hover {
 
 /* Movie results page */
 
+.pageheading {
+    text-align: center;
+}
+
+img.moviePoster {
+    width: 200px;
+}
+
+p.ng-binding {
+    
+}
+
 .movieInfo.ng-scope {
+    padding-top: 2px;
     margin: 0 auto;
     width:825px;
-    background-color: rgba(147, 190, 255, 0.49);
+    background-color: rgba(151, 164, 180, 1);
 }
 
 .movieDetails {
@@ -122,10 +152,9 @@ a.button:hover {
 }
 
 span.movieTitle {
-    display: block;
     position: relative;
     padding:10px;
-    top:80px;
+    width: 600px;
 }
 
 /* Actor results page */
@@ -133,7 +162,11 @@ span.movieTitle {
 .actorDetailsPage.ng-scope {
     margin: 0 auto;
     width:825px;
-    background-color: rgba(147, 190, 255, 0.49);
+    background-color: rgba(151, 164, 180, 1);
+}
+
+img.actorImage {
+    width: 200px;
 }
 
 footer {
@@ -150,6 +183,11 @@ footer {
 }
 
 h2.ng-binding {
+    margin: 0 auto;
+    text-align: center;
+}
+
+h3.ng-binding {
     margin: 0 auto;
     text-align: center;
 }

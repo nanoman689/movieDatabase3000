@@ -1,11 +1,11 @@
 <div class="movieInfo"> 
 
     <div class="pageheading">
-        <h1>{{movie}}, {{ details.Year }}</h1>
+        <h3>{{movie}}, {{ details.Year }}</h3>
     </div>
 
     <div class="movieDetails">
-        <img ng-src="http://img.omdbapi.com/?i={{ details.imdbID }}&apikey=cc6412ad">
+        <img class="moviePoster" ng-src="http://img.omdbapi.com/?i={{ details.imdbID }}&apikey=cc6412ad">
         <span class="movieTitle"><br /> <p>Release Date: {{ details.Released }} ({{ details.Runtime }}) <br /> {{moreDetails.tagline}}</p></span>
     </div> 
     <div class="movieInfo">
