@@ -4,6 +4,20 @@
 
 var movieApp = angular.module('movieApp',['ngRoute','ngResource']);
 
+// Error message
+
+error.controller('errSrc', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('error', function() {
+        if (attrs.src != attrs.errSrc) {
+          attrs.$set('src', attrs.errSrc);
+        }
+      });
+    }
+  }
+});
+
 // Routes
 
 movieApp.config(function($routeProvider){
@@ -28,15 +42,27 @@ movieApp.config(function($routeProvider){
         controller: 'actorController'
     })
     
+    .when('/error.html/',{
+        title: "Error",
+        templateUrl: 'pages/error.html',
+        controller: 'errorController'
+    })
+    
 });
 
 // Service
 
 movieApp.service('movieService',function(){
    
-    this.movie = "Thor";
-    this.getMovieDetails = function(name){
+    if (this.movie = ""){
+        console.log("Fill out Something!")
+    }else {
+        
+        this.movie = "Thor";
+        this.getMovieDetails = function(name){  
 
+        }
+        
     }
 
 });
@@ -62,6 +88,13 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
     
     $scope.movie = "Thor";
     
+    // clear search 
+    
+    $scope.clearSearch = function () {
+        $scope.movie = "";
+        console.log("clear movie search");
+    };
+    
 }]);
 
 // Movie Controller - Pull the name of the movie from the search and uses two APIs to get the results
@@ -71,7 +104,7 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
 movieApp.controller('movieController',
     ['$scope','$resource','$http', '$routeParams','movieService', '$route',
         function($scope, $resource, $http,  $routeParams, movieService, $route){
-    
+    $scope.poster = "img/error200x300.png"
     $scope.movie = $routeParams.name;
     movieService.movie = $scope.movie;
 
@@ -86,12 +119,17 @@ movieApp.controller('movieController',
 
             if(response.data.Error){
                 console.log(response.data.Error);
-                //redirect to error view
+                //error view
+                
             }else{
-                //everything else
+                //Everything good
+                $scope.details = response.data;
+                
+                if ($scope.details.imdbID) {
+                    $scope.poster = "http://img.omdbapi.com/?i="+ $scope.details.imdbID +"&apikey=cc6412ad"
+                }  
             }
-
-            $scope.details = response.data;
+        
             console.log('The response from the API call');
             console.log(response);
 

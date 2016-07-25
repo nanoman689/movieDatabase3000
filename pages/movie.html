@@ -5,7 +5,7 @@
     </div>
 
     <div class="movieDetails">
-        <img class="moviePoster" ng-src="http://img.omdbapi.com/?i={{ details.imdbID }}&apikey=cc6412ad">
+        <img class="moviePoster" ng-src="{{poster}}" err-src="img/error200x300.png">
         <span class="movieTitle"><br /> <p>Release Date: {{ details.Released }} ({{ details.Runtime }}) <br /> {{moreDetails.tagline}}</p></span>
     </div> 
     <div class="movieInfo">
