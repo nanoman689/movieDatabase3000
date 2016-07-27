@@ -64,8 +64,8 @@ movieApp.service('movieService',function(){
 
 // Actor controller - Gets the Actor's info from the IMDBid
 
-movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'movieService',
-    function($scope, $http, $routeParams, movieService){
+movieApp.controller('actorController', ['$scope', '$http', '$routeParams', '$location','movieService',
+    function($scope, $http, $routeParams, $location, movieService){
     
     console.log($routeParams.name);
     
@@ -73,8 +73,8 @@ movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'mov
     
     $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=" + $routeParams.name)
         .then(function(response){
-            
-            if(response.data.Error){
+            console.log(response.data);
+            if(response.data.results.length === 0){
                 console.log(response.data.Error);
                 $location.path("/error.html");
                 
@@ -103,6 +103,7 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
     $scope.searchCheck = function(e){
         if ($scope.movie === ""){
             e.preventDefault();
+            $scope.show = true;
         }
     }
     
