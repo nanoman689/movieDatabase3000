@@ -203,6 +203,20 @@ h3.ng-binding {
     text-align: center;
 }
 
+/* Error Page */
+
+.errorPage{
+    padding-top: 2px;
+    margin: 0 auto;
+    width:825px;
+    background-color: rgba(151, 164, 180, 1);
+}
+
+.errorTitle {
+    text-align: center;
+    padding: 10px;
+}
+
 /* Actor Popup */
 
 #actorsname { 

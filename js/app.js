@@ -6,7 +6,7 @@ var movieApp = angular.module('movieApp',['ngRoute','ngResource']);
 
 // Error message
 
-error.controller('errSrc', function() {
+movieApp.directive('errSrc', function() {
   return {
     link: function(scope, element, attrs) {
       element.bind('error', function() {
@@ -54,17 +54,10 @@ movieApp.config(function($routeProvider){
 
 movieApp.service('movieService',function(){
    
-    if (this.movie = ""){
-        console.log("Fill out Something!")
-    }else {
-        
-        this.movie = "Thor";
-        this.getMovieDetails = function(name){  
+    this.movie = "Thor";
+    this.getMovieDetails = function(name){  
 
-        }
-        
     }
-
 });
 
 // Controllers
@@ -73,12 +66,22 @@ movieApp.service('movieService',function(){
 
 movieApp.controller('actorController', ['$scope', '$http', '$routeParams',  'movieService',
     function($scope, $http, $routeParams, movieService){
+    
     console.log($routeParams.name);
-    $scope.movie =  movieService.movie;
+    
+    $scope.movie = movieService.movie;
+    
     $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=" + $routeParams.name)
         .then(function(response){
-            $scope.actorDetails = response.data.results[0];
-            console.log($scope.actorDetails);
+            
+            if(response.data.Error){
+                console.log(response.data.Error);
+                $location.path("/error.html");
+                
+            }else{
+                $scope.actorDetails = response.data.results[0];
+                console.log($scope.actorDetails);
+            }
         });
 }]);
 
@@ -88,12 +91,20 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
     
     $scope.movie = "Thor";
     
-    // clear search 
+    // Clear the search field 
     
     $scope.clearSearch = function () {
         $scope.movie = "";
         console.log("clear movie search");
     };
+    
+    // Prevent a search of the form box is empty
+    
+    $scope.searchCheck = function(e){
+        if ($scope.movie === ""){
+            e.preventDefault();
+        }
+    }
     
 }]);
 
@@ -102,8 +113,8 @@ movieApp.controller('homeController', ['$scope', 'movieService',function($scope,
 // TheMoviewDB - Pulls more information for the movie as well as information for the actor(s)
 
 movieApp.controller('movieController',
-    ['$scope','$resource','$http', '$routeParams','movieService', '$route',
-        function($scope, $resource, $http,  $routeParams, movieService, $route){
+    ['$scope','$resource','$http', '$routeParams','movieService', '$route', '$location',
+        function($scope, $resource, $http,  $routeParams, movieService, $route, $location){
     $scope.poster = "img/error200x300.png"
     $scope.movie = $routeParams.name;
     movieService.movie = $scope.movie;
@@ -119,7 +130,7 @@ movieApp.controller('movieController',
 
             if(response.data.Error){
                 console.log(response.data.Error);
-                //error view
+                $location.path("/error.html");
                 
             }else{
                 //Everything good
@@ -127,20 +138,20 @@ movieApp.controller('movieController',
                 
                 if ($scope.details.imdbID) {
                     $scope.poster = "http://img.omdbapi.com/?i="+ $scope.details.imdbID +"&apikey=cc6412ad"
-                }  
-            }
-        
-            console.log('The response from the API call');
-            console.log(response);
+                }
+                
+                console.log('The response from the API call');
+                console.log(response);
 
-            $http.get("https://api.themoviedb.org/3/movie/"
+                $http.get("https://api.themoviedb.org/3/movie/"
                 + $scope.details.imdbID
                 + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
-           .then(function(response){
-               console.log('The second Then');
-               console.log(response);
-               $scope.moreDetails = response.data;
-           })
+                .then(function(response){
+                    console.log('The second Then');
+                    console.log(response);
+                $scope.moreDetails = response.data;
+                })
+            }
         }
     );
     
@@ -159,4 +170,10 @@ movieApp.controller('movieController',
       $route.reload();
     };
     
-}]);    
+}]);  
+
+movieApp.controller('errorController', ['$scope', 'movieService',function($scope, movieService){
+
+    
+    
+}]);

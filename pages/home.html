@@ -1,9 +1,10 @@
 <div class="row">
     <div class="searchBox">
-        <form class="searchMovie">
+        <form name="searchMovieNow" class="searchMovie">
             <input type="text" ng-model="movie" name="movieSearch" id="movieSearch"/>
-            <a href="#/movie.html/{{movie}}" class="button" required>Search Away</a>
-            <a href="" ng-click="clearSearch()" class="button">Clear Search</a>
+            <a href="#/movie.html/{{movie}}" ng-click="searchCheck($event)" class="button">Search Away</a>
+            <a href="" ng-click="clearSearch(); show = !show" ng-model="none" name="clearSearch" class="button">Clear Search</a>
+                <div class="searchError" ng-show="show">Please enter a movie to search.</div>
         </form>
     </div>
 </div>
