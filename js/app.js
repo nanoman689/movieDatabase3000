@@ -52,35 +52,40 @@ movieApp.config(function($routeProvider){
 
 // Service
 
-movieApp.service('movieService',function(){
+movieApp.service('movieService',function($http){
    
     this.movie = "Thor";
     this.getMovieDetails = function(name){  
 
     }
+    this.getActor = function(name){
+        var url = "https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=";
+        return $http
+            .get(url + name)
+            .then(function(response){
+                return response.data.results;
+            });
+    }
+
 });
 
 // Controllers
 
 // Actor controller - Gets the Actor's info from the IMDBid
 
-movieApp.controller('actorController', ['$scope', '$http', '$routeParams', '$location','movieService',
-    function($scope, $http, $routeParams, $location, movieService){
+movieApp.controller('actorController', ['$scope', '$routeParams', '$location','movieService',
+    function($scope, $routeParams, $location, movieService){
     
     console.log($routeParams.name);
     
     $scope.movie = movieService.movie;
     
-    $scope.movieActor = $http.get("https://api.themoviedb.org/3/search/person?api_key=651514f7e8896c44cfcec49d1bf2f778&search_type=ngram&query=" + $routeParams.name)
-        .then(function(response){
-            console.log(response.data);
-            if(response.data.results.length === 0){
-                console.log(response.data.Error);
+    $scope.movieActor =  movieService.getActor($routeParams.name)
+        .then(function(results){
+            if(results.length === 0){
                 $location.path("/error.html");
-                
             }else{
-                $scope.actorDetails = response.data.results[0];
-                console.log($scope.actorDetails);
+                $scope.actorDetails = results[0];
             }
         });
 }]);
