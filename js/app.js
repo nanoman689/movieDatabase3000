@@ -124,7 +124,8 @@ movieApp.controller('movieController',
     $scope.poster = "img/error200x300.png"
     $scope.movie = $routeParams.name;
     movieService.movie = $scope.movie;
-
+    
+    // Split the Actor results
     console.log('The movie when the page loads: ' + $scope.movie);
     $scope.splitActors = function(string, nb) {
         var array = string.split(',');
@@ -135,11 +136,12 @@ movieApp.controller('movieController',
         .then(function(response){
 
             if(response.data.Error){
+                // Opps! A Wild Erroron has appeared! Use Pikachu!
                 console.log(response.data.Error);
                 $location.path("/error.html");
                 
             }else{
-                //Everything good
+                //Everything good, Pikachu was super effective.
                 $scope.details = response.data;
                 
                 if ($scope.details.imdbID) {

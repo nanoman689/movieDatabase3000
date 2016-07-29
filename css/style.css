@@ -6,10 +6,16 @@ body {
 
 a {
     color: #495F7F;
+    text-decoration: none;
 }
 
 a:visited {
     color: #495F7F;
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 /* need to fix img */
@@ -59,7 +65,7 @@ h3 {
 h4 {
     font-family: 'Arimo', sans-serif;
     font-weight: 500;
-    font-size:1.1em;
+    font-size:1.2em;
     padding-left: 15px;
 }
 
@@ -75,6 +81,12 @@ h5 {
     height: 75px;
     padding: 10px;
     background-color: rgb(74, 85, 98);
+}
+
+span.mainText {
+    font-family: 'Arimo', sans-serif;
+    font-weight: 700;
+    font-size:1.2em;  
 }
 
 .textTop {
@@ -268,8 +280,18 @@ h3.ng-binding {
     
     .movieInfo.ng-scope {
         padding-top: 2px;
-        width:560px;
     }
+    
+    h2 {
+        font-size: 1.6em;
+        padding: 5px;
+    }
+    
+    h4 {
+        font-size: 1.4em;
+        padding: 5px;
+    }
+    
 }
 
 

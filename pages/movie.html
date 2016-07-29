@@ -9,25 +9,43 @@
         <span class="movieTitle"><br /> <p>Release Date: {{ details.Released }} ({{ details.Runtime }}) <br /> {{moreDetails.tagline}}</p></span>
     </div> 
     <div class="movieInfo">
-        <h2>Plot:</h2> <h4>{{ details.Plot }}</h4>
-        <h2>Directors:</h2> <h4>{{ details.Director }}</h4>
-        <h2>Production Companies</h2><h4>{{moreDetails.production_companies[0].name}}</h4>
-        <h2>Production Countries</h2><h4>{{moreDetails.production_countries[0].name}}</h4>
-        <h2>Actors:</h2><h4>
+        <div class="movieDisplay">   
+            <h4><span class="mainText">Plot:</span> {{ details.Plot }}</h4>
+        </div>
+        
+        <div class="movieDisplay">   
+            <h4><span class="mainText">Directors:</span> {{ details.Director }}</h4>
+        </div>
+        
+        <div class="movieDisplay">   
+            <h4><span class="mainText">Production Companies:</span> {{moreDetails.production_companies[0].name}}</h4>
+            <h4><span class="mainText">Production Countries:</span> {{moreDetails.production_countries[0].name}}</h4>
+        </div>
+        
+        <h4><span class="mainText">Actors:</span>
             <ul class="actorResults">
                 <li ng-repeat="actor in details.Actors.split(',')">
                     <a href="#/actor.html/{{actor}}">{{actor}}</a>
                 </li>
             </ul>
-        <h2>Genre:</h2> <h4>{{details.Genre }}</h4>
-        <h2>IMDb Rating:</h2> <h4>{{ details.imdbRating }}</h4>
-        <h2>Related Movies:</h2>
+        </h4>    
+            
+        <div class="movieDisplay">  
+            <h4><span class="mainText">Genre:</span> {{details.Genre }}</h4>
+        </div>
+           
+        <div class="movieDisplay">  
+            <h4><span class="mainText">IMDb Rating:</span> {{ details.imdbRating }}</h4>
+        </div>
+        
+        <h4><span class="mainText">Related Movies:</span>
             <ul class="relatedMovies">
               <li ng-repeat="movie in related.Search">
                 <a href="#/movie.html/{{movie.Title}}" id="{{ $index + 1 }}">
                     {{ movie.Title }}</a>, {{ movie.Year }}     
               </li>
             </ul>
+        </h4>    
         <div>
             <p><a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank">Watch the trailers!</a></p>
         </div>

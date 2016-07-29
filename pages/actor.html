@@ -8,9 +8,9 @@
     <div class="actorResults">
         <ul class="actorResultsList"> 
            <li ng-repeat="movie in actorDetails.known_for">
-                <div><h2>Title:</h2> <h4>{{movie.original_title}}</h4></div>
-                <div><h2>Overview:</h2> <h4>{{movie.overview}}</h4></div>
-                <div><h2>Release Date:</h2> <h4>{{movie.release_date}}</h4></div>
+               <div><h4><span class="mainText">Title:</span> {{movie.original_title}}</h4></div>
+               <div><h4><span class="mainText">Overview:</span> {{movie.overview}}</h4></div>
+               <div><h4><span class="mainText">Release Date:</span> {{movie.release_date}}</h4></div>
             </li>
         </ul>
     </div>
