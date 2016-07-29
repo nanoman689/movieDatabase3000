@@ -234,4 +234,63 @@ h3.ng-binding {
     left: 100px; 
     top: -10px; 
     color: #FFFFFF; 
-    padding: 0 5px; }
+    padding: 0 5px; 
+}
+
+/* Media Screen Stuff */
+
+@media only screen and (min-width: 520px) and (max-width: 799px) {
+
+    a.button {
+        font-size: 18px;
+        display: block; 
+        margin: 0 auto;
+        width: 502px;
+        margin-bottom: 5px;
+    }
+    
+    input#movieSearch {
+        padding:8px; 
+        border-width:3px; 
+        font-size:18px; 
+        text-align:left;
+        width:520px;
+        margin-bottom: 5px;
+    }
+    
+    form.searchMovie.ng-pristine.ng-valid {
+        padding: 2px;
+    }
+
+    form.searchMovie.ng-valid.ng-dirty.ng-valid-parse {
+        padding: 2px;
+    }
+    
+    .movieInfo.ng-scope {
+        padding-top: 2px;
+        width:560px;
+    }
+}
+
+
+@media only screen and (min-width: 800px) and (max-width: 1024px) {
+
+    a.button {
+        font-size: 18px;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;
+    }
+    
+    input#movieSearch {
+        padding:8px; 
+        border-width:3px; 
+        font-size:18px; 
+        text-align:left;
+        width:280px;
+    }
+    
+    .movieInfo.ng-scope {
+        padding-top: 2px;
+        width:750px;
+    }
+}
