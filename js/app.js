@@ -66,6 +66,8 @@ movieApp.service('movieService',function($http){
                 return response.data.results;
             });
     }
+    
+    
 
 });
 

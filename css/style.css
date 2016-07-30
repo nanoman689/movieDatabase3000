@@ -2,6 +2,7 @@ body {
     background-image: url("../img/movie_bg_001.png");
     margin: 0;
     padding: 0;
+    min-width: 825px;
 }
 
 a {
@@ -17,8 +18,6 @@ a:visited {
 a:hover {
     cursor: pointer;
 }
-
-/* need to fix img */
 
 img {
     width: 300px;
@@ -53,12 +52,14 @@ h2 {
     font-weight: 700;
     font-size:1.2em;
     padding: 15px;
+    line-height: 1.6;
 }
 
 h3 {
     font-family: 'Arimo', sans-serif;
     font-weight: 700;
     font-size: 2.5em;
+    line-height: 1.6;
 }
 
 
@@ -67,6 +68,7 @@ h4 {
     font-weight: 500;
     font-size:1.2em;
     padding-left: 15px;
+    line-height: 1.6;
 }
 
 h5 {
@@ -251,7 +253,7 @@ h3.ng-binding {
 
 /* Media Screen Stuff */
 
-@media only screen and (min-width: 520px) and (max-width: 799px) {
+@media only screen and (min-width: 320px) and (max-width: 799px) {
 
     a.button {
         font-size: 18px;
@@ -283,13 +285,13 @@ h3.ng-binding {
     }
     
     h2 {
-        font-size: 1.6em;
+        font-size: 1.8em;
         padding: 5px;
     }
     
     h4 {
-        font-size: 1.4em;
-        padding: 5px;
+        font-size: 1.6em;
+        padding: 6px;
     }
     
 }
@@ -313,6 +315,11 @@ h3.ng-binding {
     
     .movieInfo.ng-scope {
         padding-top: 2px;
+        width:750px;
+    }
+    
+    .actorDetailsPage.ng-scope {
+        margin: 0 auto;
         width:750px;
     }
 }
