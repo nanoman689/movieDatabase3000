@@ -5,6 +5,15 @@ body {
     min-width: 825px;
 }
 
+html, body {
+    width:100%;
+}
+
+.head_content{
+    width:50%;
+    margin: 0 auto;
+}
+
 a {
     color: #495F7F;
     text-decoration: none;

@@ -55,7 +55,34 @@ movieApp.config(function($routeProvider){
 movieApp.service('movieService',function($http){
    
     this.movie = "Thor";
-    this.getMovieDetails = function(name){  
+    this.getMovieDetails = function(name){
+        var url1 = "http://www.omdbapi.com/?t=" + name + "&y=&plot=full&r=json";
+        return $http
+            .get(url1)
+            .then(function(response){
+                if(response.data.Error){
+                    return 'Error';
+                }else{
+                    return response.data;
+                }
+            }).then(function(data){
+                if(data === 'Error'){
+                    return 'Error';
+                }else{
+                    var url2 = "https://api.themoviedb.org/3/movie/"
+                        + data.imdbID
+                        + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK";
+                    var details = {
+                        details: data,
+                        moreDetails:null
+                    };
+                    $http.get(url2)
+                        .then(function(response){
+                        details.moreDetails = response.data;
+                    });
+                    return details;
+                }
+            });
 
     }
     this.getActor = function(name){
@@ -133,37 +160,19 @@ movieApp.controller('movieController',
         var array = string.split(',');
         return array[nb];
     }
-    
-    $scope.movieAPI = $http.get("http://www.omdbapi.com/?t=" + $scope.movie + "&y=&plot=full&r=json")
-        .then(function(response){
 
-            if(response.data.Error){
-                // Opps! A Wild Erroron has appeared! Use Pikachu!
-                console.log(response.data.Error);
-                $location.path("/error.html");
-                
+    movieService.getMovieDetails($scope.movie)
+        .then(function(details){
+            if(details === 'Error'){
+                $location.path('/error.html');
             }else{
-                //Everything good, Pikachu was super effective.
-                $scope.details = response.data;
-                
-                if ($scope.details.imdbID) {
-                    $scope.poster = "http://img.omdbapi.com/?i="+ $scope.details.imdbID +"&apikey=cc6412ad"
+                $scope.details = details.details;
+                if(details.details.imdbID){
+                    $scope.poster =  "http://img.omdbapi.com/?i="+ details.details.imdbID +"&apikey=cc6412ad"
                 }
-                
-                console.log('The response from the API call');
-                console.log(response);
-
-                $http.get("https://api.themoviedb.org/3/movie/"
-                + $scope.details.imdbID
-                + "?api_key=651514f7e8896c44cfcec49d1bf2f778&find/movie/id/callback=JSON_CALLBACK")
-                .then(function(response){
-                    console.log('The second Then');
-                    console.log(response);
-                $scope.moreDetails = response.data;
-                })
+                $scope.moreDetails = details.moreDetails;
             }
-        }
-    );
+        });
     
     /* related movies results */
     
